@@ -13,6 +13,9 @@ class Camera:
         print(f"Releasing camera {self.cam_id}")
         self.cam.release()
 
+    def __del__(self):
+        self.release()
+
 
 if __name__ == "__main__":
     c = Camera()
@@ -22,6 +25,5 @@ if __name__ == "__main__":
             key = cv2.waitKey(1)
             if key == ord('q'):
                 break
-    c.release()
 
         
