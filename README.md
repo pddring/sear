@@ -13,4 +13,7 @@ Create a `settings.json` file in the src folder:
 ```
 
 Install relevant libraries:
-`sudo apt install python3-opencv google-generativeai pyaudio`
+`sudo apt install python3-opencv python3-pyaudio`
+
+Then create a virtual environment and install additional libraries:
+`pip install google-generativeai`
