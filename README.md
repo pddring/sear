@@ -12,12 +12,17 @@ You can create one here: https://aistudio.google.com/app/api-keys
 Create a `settings.json` file in the src folder:
 ```
 {
-    "APIKEY":"INSERT YOUR API KEY HERE",
+    "API_KEY":"INSERT YOUR API KEY HERE",
     "camera_id": 0
 }
 ```
 Install the following system libraries
-`sudo apt install libportaudio-ocaml-dev`
+`sudo apt install libportaudio-ocaml-dev bluez-alsa-utils pulseaudio pulseaudio-module-bluetooth`
+
+Add the user to the bluetooth group:
+`sudo adduser pi bluetooth`
 
 Create a virtual environment and install additional libraries:
-`pip install google-generativeai opencv-python pyaudio`
+`pip install google-genai opencv-python pyaudio`
+
+This guide was helpful for setting up bluetooth headphones: https://gist.github.com/actuino/9548329d1bba6663a63886067af5e4cb#pair-and-connect
