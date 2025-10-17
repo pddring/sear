@@ -12,6 +12,12 @@ class Audio:
   def select_output_device(self, index):
     self.output_device_index = index
 
+  def get_output_devices(self):
+    devices = []
+    for i in range(self.a.get_device_count()):
+      devices.append(self.a.get_device_info_by_index(i))
+    return devices
+
   def play_audio(self, wavfile="last_speech.wav"):
         #define stream chunk   
         chunk = 1024  
@@ -39,8 +45,7 @@ if __name__ == "__main__":
   print("Testing audio")
   a = Audio()
   
-  for i in range(audio.get_device_count()):
-    print(a.a.get_device_info_by_index(i))
+  print(a.get_output_devices())
 
   a.play_audio()
   
