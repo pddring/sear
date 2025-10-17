@@ -1,8 +1,8 @@
 import camera
 import json
 import os
+import audio
 import wave
-import pyaudio
 from google import genai
 from google.genai import types
 
@@ -19,7 +19,7 @@ class Sear:
         self.ai = genai.Client(api_key=self.settings["API_KEY"])
 
         print("Initialising PyAudio")
-        self.audio = pyaudio.PyAudio() 
+        self.audio = audio.Audio() 
 
     def __del__(self):
         print("Releasing PyAudio    ")
@@ -67,27 +67,6 @@ class Sear:
         file_name='last_speech.wav'
         self.wave_file(file_name, data)
 
-    def play_audio(self, wavfile="last_speech.wav"):
-        #define stream chunk   
-        chunk = 1024  
-        
-        #open stream  
-        f = wave.open(wavfile,"rb")  
-        stream = self.audio.open(format = self.audio.get_format_from_width(f.getsampwidth()),  
-                        channels = f.getnchannels(),  
-                        rate = f.getframerate(),  
-                        output = True)  
-        #read data  
-        data = f.readframes(chunk)  
-        
-        #play stream  
-        while data:  
-            stream.write(data)  
-            data = f.readframes(chunk)  
-        
-        #stop stream  
-        stream.stop_stream()  
-        stream.close()  
     
     def describe(self, prompt=""):
         if prompt == "":
@@ -120,7 +99,7 @@ if __name__ == "__main__":
     print("Generating speech audio file...")
     s.get_speech(response)
     print("Playing speech")
-    s.play_audio()
+    s.audio.play_audio()
     if input("detailed? [y/n]") == "y":
         print("Detailed:")
         response = s.describe("describe this photo in detail as an audio description suitable for a blind person")
@@ -128,6 +107,6 @@ if __name__ == "__main__":
         print("Generating speech audio file...")
         s.get_speech(response)
         print("Playing speech")
-        s.play_audio()
+        s.audio.play_audio()
 
 
