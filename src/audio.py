@@ -46,8 +46,12 @@ if __name__ == "__main__":
   a = Audio()
   
   devices = a.get_output_devices()
+  desired_name = "bluealsa"
   for i in range(len(devices)):
     print(f"Device {i}: {devices[i]["name"]}")
+    if devices[i]["name"] == desired_name:
+      a.select_output_device(i)
+      print(f"  -> Selecting device {devices[i]}")
 
   a.play_audio()
   
