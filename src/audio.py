@@ -40,7 +40,7 @@ if __name__ == "__main__":
   a = Audio()
   
   for i in range(audio.get_device_count()):
-    print(audio.get_device_info_by_index(i))
+    print(a.a.get_device_info_by_index(i))
 
   a.play_audio()
   
