@@ -7,7 +7,12 @@ class Camera:
         print(f"Initialising camera {cam_id}")
 
     def take_picture(self):
-        result, self.last_frame = self.cam.read()
+        attempts = 0
+        result = False
+        while attempts < 1000 and result == False:
+            attempts += 1
+            result, self.last_frame = self.cam.read()
+            print(f"Attempt {attempts}: {result}")
         return result
     
     def view_and_shoot(self):
@@ -32,7 +37,7 @@ class Camera:
 
 if __name__ == "__main__":
     c = Camera()
-    c.view_and_shoot()
+    print(c.take_picture())
     c.save()
 
         

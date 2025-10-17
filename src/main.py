@@ -111,7 +111,7 @@ class Sear:
 
 if __name__ == "__main__":
     s = Sear()
-    s.cam.view_and_shoot()
+    s.cam.take_picture()
     s.cam.save()
     
     print("Describing image...")
