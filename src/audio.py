@@ -45,7 +45,9 @@ if __name__ == "__main__":
   print("Testing audio")
   a = Audio()
   
-  print(a.get_output_devices())
+  devices = a.get_output_devices()
+  for i in range(len(dev)):
+    print(f"Device {i}: {dev[i]["name"]}")
 
   a.play_audio()
   
