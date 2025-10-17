@@ -90,6 +90,7 @@ class Sear:
 
 if __name__ == "__main__":
     s = Sear()
+    s.audio.select_output_device_by_name("bluealsa")
     s.cam.take_picture()
     s.cam.save()
     

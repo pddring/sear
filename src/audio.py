@@ -9,8 +9,16 @@ class Audio:
   def __del__(self):
     self.a.terminate()
 
-  def select_output_device(self, index):
+  def select_output_device_by_id(self, index):
     self.output_device_index = index
+  
+  def select_output_device_by_name(self, name):
+    devices = self.get_output_devices()
+    for i in range(len(devices)):
+      print(f"Device {i}: {devices[i]["name"]}")
+      if devices[i]["name"] == name:
+        self.select_output_device_by_id(i)
+        print(f"  -> Selecting device {devices[i]}")
 
   def get_output_devices(self):
     devices = []
@@ -44,14 +52,6 @@ class Audio:
 if __name__ == "__main__":
   print("Testing audio")
   a = Audio()
-  
-  devices = a.get_output_devices()
-  desired_name = "bluealsa"
-  for i in range(len(devices)):
-    print(f"Device {i}: {devices[i]["name"]}")
-    if devices[i]["name"] == desired_name:
-      a.select_output_device(i)
-      print(f"  -> Selecting device {devices[i]}")
-
+  a.select_output_device_by_name("bluealsa")
   a.play_audio()
   
