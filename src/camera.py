@@ -6,6 +6,9 @@ class Camera:
         self.cam = cv2.VideoCapture(cam_id)
         print(f"Initialising camera {cam_id}")
 
+        for i in range(150):
+            self.take_picture()
+
     def take_picture(self):
         attempts = 0
         result = False
