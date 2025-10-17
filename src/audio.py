@@ -24,7 +24,7 @@ class Audio:
         
         #open stream  
         f = wave.open(wavfile,"rb")  
-        stream = self.a.open(format = self.audio.get_format_from_width(f.getsampwidth()),  
+        stream = self.a.open(format = self.a.get_format_from_width(f.getsampwidth()),  
                         channels = f.getnchannels(),  
                         rate = f.getframerate(),  
                         output = True,
