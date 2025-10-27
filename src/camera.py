@@ -6,13 +6,12 @@ class Camera:
         self.cam = cv2.VideoCapture(cam_id)
         print(f"Initialising camera {cam_id}")
 
-        for i in range(150):
-            self.take_picture()
+        self.take_picture(150)
 
-    def take_picture(self):
-        attempts = 0
+    def take_picture(self, max_attempts = 10):
         result = False
-        while attempts < 1000 and result == False:
+        attempts = 0
+        while attempts < max_attempts and result == False:
             attempts += 1
             result, self.last_frame = self.cam.read()
             print(f"Attempt {attempts}: {result}")

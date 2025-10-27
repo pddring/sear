@@ -7,7 +7,8 @@ class Audio:
     self.output_device_index = 0
 
   def __del__(self):
-    self.a.terminate()
+      print("Freeing up audio device")
+      self.a.terminate()
 
   def select_output_device_by_id(self, index):
     self.output_device_index = index
@@ -15,7 +16,8 @@ class Audio:
   def select_output_device_by_name(self, name):
     devices = self.get_output_devices()
     for i in range(len(devices)):
-      print(f"Device {i}: {devices[i]["name"]}")
+      dev_name = devices[i]["name"]
+      print(f"Device {i}: {dev_name}")
       if devices[i]["name"] == name:
         self.select_output_device_by_id(i)
         print(f"  -> Selecting device {devices[i]}")
@@ -52,6 +54,7 @@ class Audio:
 if __name__ == "__main__":
   print("Testing audio")
   a = Audio()
-  a.select_output_device_by_name("bluealsa")
+  print(a.get_output_devices())
+  a.select_output_device_by_id(5)
   a.play_audio()
   

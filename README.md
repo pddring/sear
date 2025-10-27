@@ -23,6 +23,6 @@ Add the user to the bluetooth group:
 `sudo adduser pi bluetooth`
 
 Create a virtual environment and install additional libraries:
-`pip install google-genai opencv-python pyaudio`
+`pip install google-genai opencv-python pyaudio azure-cognitiveservices-speech azure-ai-vision-imageanalysis`
 
 This guide was helpful for setting up bluetooth headphones: https://gist.github.com/actuino/9548329d1bba6663a63886067af5e4cb#pair-and-connect
