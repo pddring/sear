@@ -5,6 +5,8 @@ class Camera:
         self.last_frame = False
         self.cam = cv2.VideoCapture(cam_id)
         print(f"Initialising camera {cam_id}")
+        self.cam.set(3, 1920)
+        self.cam.set(4, 1080)
 
         self.take_picture(150)
 

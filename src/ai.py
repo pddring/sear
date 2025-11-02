@@ -9,7 +9,6 @@ from azure.ai.vision.imageanalysis.models import VisualFeatures
 from azure.core.credentials import AzureKeyCredential
 import azure.cognitiveservices.speech as speechsdk
 
-
 class AI:
     def __init__(self, api_key):
         self.api_key = api_key
@@ -82,8 +81,9 @@ class AzureAI(AI):
             image_bytes = f.read()
         result = self.client._analyze_from_image_data(
             image_data=image_bytes,
-            visual_features=[VisualFeatures.CAPTION]
+            visual_features=[VisualFeatures.CAPTION,VisualFeatures.READ]
         )
+        print(result)
         if result:
             return result["captionResult"]["text"]
     
@@ -93,8 +93,24 @@ class AzureAI(AI):
         speech_config = speechsdk.SpeechConfig(subscription=self.api_key, endpoint=self.endpoint)
         speech_config.set_speech_synthesis_output_format(format_id=speechsdk.SpeechSynthesisOutputFormat.Riff16Khz16BitMonoPcm)
         audio_config = speechsdk.AudioConfig(filename=filename)
+        """en-GB-SoniaNeural (Female)
+        en-GB-OliviaNeural (Female)
+        en-GB-LibbyNeural (Female)
+        en-GB-AdaMultilingualNeural4 (Female)
+        en-GB-AbbiNeural (Female)
+        en-GB-BellaNeural (Female)
+        en-GB-HollieNeural (Female)
+        en-GB-EthanNeural (Male)
+        en-GB-MaisieNeural (Female, Child)
+        en-GB-ElliotNeural (Male)
+        en-GB-AlfieNeural (Male)
+        en-GB-NoahNeural (Male)
+        en-GB-OliverNeural (Male)
+        en-GB-OllieMultilingualNeural4 (Male)
+        en-GB-RyanNeural (Male)
+        en-GB-ThomasNeural """
         # Set the voice name, refer to https://aka.ms/speech/voices/neural for full list.
-        speech_config.speech_synthesis_voice_name = "en-GB-SoniaNeural"
+        speech_config.speech_synthesis_voice_name = "en-GB-MaisieNeural"
 
         # Creates a speech synthesizer using the default speaker as audio output.
         speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config,audio_config=audio_config)
@@ -103,7 +119,10 @@ class AzureAI(AI):
         return result
 
 if __name__ == "__main__":
-    a = AzureAI(os.environ["VISION_KEY"])
-    result = a.get_speech(input("Enter text to say:"))
-    print(result)
+    import settings
+    s = settings.Settings()
+    s.load_settings()
+    a = AzureAI(s.settings["AZURE_KEY"], s.settings["AZURE_ENDPOINT"])
+    #result = a.get_speech(input("Enter text to say:"))
+    print(a.describe())
     
