@@ -9,6 +9,10 @@ You will need a Google Gemini API key for this to work.
 You can create one here: https://aistudio.google.com/app/api-keys
 
 ## Setup instructions
+
+Clone this repository to get a copy of the source code on the raspberry pi:
+`git clone https://github.dev/pddring/sear`
+
 Create a `settings.json` file in the src folder:
 ```
 {
@@ -22,7 +26,13 @@ Install the following system libraries
 Add the user to the bluetooth group:
 `sudo adduser pi bluetooth`
 
-Create a virtual environment and install additional libraries:
+Create a virtual environment:
+`python3 -m venv venv`
+
+Activate that virtual environment:
+`source venv/bin/activate`
+
+install additional libraries:
 `pip install google-genai opencv-python pyaudio azure-cognitiveservices-speech azure-ai-vision-imageanalysis`
 
 This guide was helpful for setting up bluetooth headphones: https://gist.github.com/actuino/9548329d1bba6663a63886067af5e4cb#pair-and-connect
