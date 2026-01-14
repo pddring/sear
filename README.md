@@ -27,7 +27,7 @@ Add the user to the bluetooth group:
 `sudo adduser pi bluetooth`
 
 Create a virtual environment:
-`python3 -m venv venv`
+`virtualenv --system-site-packages venv`
 
 Activate that virtual environment:
 `source venv/bin/activate`

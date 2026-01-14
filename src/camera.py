@@ -1,47 +1,31 @@
-import cv2
+import picamera2
 class Camera:
     def __init__(self, cam_id = 0):
         self.cam_id = cam_id
         self.last_frame = False
-        self.cam = cv2.VideoCapture(cam_id)
+
+        self.cam = picamera2.Picamera2(cam_id)
+        print(self.cam.sensor_modes)
+        self.config = self.cam.create_still_configuration(
+            buffer_count=1, 
+            main={"size": (640, 480)})
+        self.cam.start()
+        
         print(f"Initialising camera {cam_id}")
-        self.cam.set(3, 1920)
-        self.cam.set(4, 1080)
 
-        self.take_picture(150)
-
-    def take_picture(self, max_attempts = 10):
-        result = False
-        attempts = 0
-        while attempts < max_attempts and result == False:
-            attempts += 1
-            result, self.last_frame = self.cam.read()
-            print(f"Attempt {attempts}: {result}")
-        return result
-    
-    def view_and_shoot(self):
-        while True:
-            if self.take_picture():
-                cv2.imshow("SEar", self.last_frame)
-                key = cv2.waitKey(1)
-                if key > -1:
-                    print(key)
-                    break
-
-    def save(self, filename="last_frame.jpg"):
-        cv2.imwrite(filename, self.last_frame)
-    
-    def release(self):
-        print(f"Releasing camera {self.cam_id}")
-        self.cam.release()
+    def take_picture(self, filename="last_frame.jpg"):
+        request = self.cam.capture_request(flush=True)
+        request.save('main', filename)
+        request.release()
 
     def __del__(self):
-        self.release()
-
+        self.cam.stop()
 
 if __name__ == "__main__":
     c = Camera()
-    print(c.take_picture())
-    c.save()
+    i = ""
+    while i != "q":
+        i = input("Press Enter to take a picture... (or q to quit)")
+        c.take_picture()
 
         
