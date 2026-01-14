@@ -79,6 +79,7 @@ class AzureAI(AI):
     def describe(self):
         with open('last_frame.jpg', 'rb') as f:
             image_bytes = f.read()
+        print(f"Read {len(image_bytes)} from last_frame.jpg")
         result = self.client._analyze_from_image_data(
             image_data=image_bytes,
             visual_features=[VisualFeatures.CAPTION,VisualFeatures.READ]
@@ -122,7 +123,8 @@ if __name__ == "__main__":
     import settings
     s = settings.Settings()
     s.load_settings()
-    a = AzureAI(s.settings["AZURE_KEY"], s.settings["AZURE_ENDPOINT"])
+    #a = AzureAI(s.settings["AZURE_KEY"], s.settings["AZURE_ENDPOINT"])
+    a = GoogleAI(s.settings["API_KEY"])
     #result = a.get_speech(input("Enter text to say:"))
     print(a.describe())
     
