@@ -33,6 +33,6 @@ Activate that virtual environment:
 `source venv/bin/activate`
 
 install additional libraries:
-`pip gpiozero install google-genai opencv-python pyaudio azure-cognitiveservices-speech azure-ai-vision-imageanalysis`
+`pip install gpiozero google-genai opencv-python pyaudio azure-cognitiveservices-speech azure-ai-vision-imageanalysis`
 
 This guide was helpful for setting up bluetooth headphones: https://gist.github.com/actuino/9548329d1bba6663a63886067af5e4cb#pair-and-connect
