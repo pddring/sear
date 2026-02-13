@@ -1,19 +1,5 @@
 import time
-
-try:
-	from gpiozero import Button
-except ImportError:
-	# Mock Button class for non-Raspberry Pi environments
-	class Button:
-		def __init__(self, pin):
-			self.pin = pin
-			self.is_pressed = False
-
-		def press(self):
-			self.is_pressed = True
-
-		def release(self):
-			self.is_pressed = False
+from gpiozero import Button
 
 LONG_PRESS = 1000	# milliseconds for a long press
 
