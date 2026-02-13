@@ -125,6 +125,7 @@ if __name__ == "__main__":
     s.load_settings()
     #a = AzureAI(s.settings["AZURE_KEY"], s.settings["AZURE_ENDPOINT"])
     a = GoogleAI(s.settings["API_KEY"])
-    #result = a.get_speech(input("Enter text to say:"))
-    print(a.describe())
+    speech = input("TTS: what to say?")
+    filename = input("Filename:")
+    result = a.get_speech(speech, filename)
     

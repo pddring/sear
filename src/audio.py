@@ -54,7 +54,9 @@ class Audio:
 if __name__ == "__main__":
   print("Testing audio")
   a = Audio()
-  print(a.get_output_devices())
-  a.select_output_device_by_id(5)
-  a.play_audio()
+  devices = a.get_output_devices()
+  for dev in devices:
+     print(f"{dev['index']}: {dev['name']}")
+  #a.select_output_device_by_id(5)
+  #a.play_audio()
   

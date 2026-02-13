@@ -10,7 +10,9 @@ class Settings:
             "API_KEY":"",
             "camera_id":0,
             "AZURE_KEY":"",
-            "AZURE_ENDPOINT":""
+            "AZURE_ENDPOINT":"",
+            "bluetooth_device":"",
+            "voice_prompt":"Read aloud in a northern british accent"
         }
         
         with open(settings_file) as f:

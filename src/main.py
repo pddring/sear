@@ -1,7 +1,8 @@
 import camera
 import json
 import os
-import audio
+#import audio
+import bluetooth
 import ai
 import settings
 import buttons
@@ -18,19 +19,19 @@ class Sear(settings.Settings):
         #self.ai = ai.AzureAI(self.settings["AZURE_KEY"], self.settings["AZURE_ENDPOINT"])
         self.ai = ai.GoogleAI(self.settings["API_KEY"])
 
-        print("Initialising PyAudio")
-        self.audio = audio.Audio()
+        print("Initialising Bluetooth audio")
+        self.audio = bluetooth.Bluetooth(self.settings["bluetooth_device"])
     
     def go_button(self, name):
         print("Taking picture")
         s.cam.take_picture()
-        
         print("Describing image...")
+        s.audio.play_audio("wait_ai.wav", False)
         response = s.ai.describe()
         print(response)
         print("Generating speech audio file...")
-        speech = s.ai.get_speech(response)
-        print(speech)
+        s.audio.play_audio("wait_tts.wav", False)
+        s.ai.get_speech(self.settings["voice_prompt"] + "\n" + response)
         print("Playing speech")
         s.audio.play_audio()
         """if input("detailed? [y/n]") == "y":
@@ -46,13 +47,6 @@ class Sear(settings.Settings):
         print("Starting button server")
         self.buttons.start()
 
-    
-
-
 if __name__ == "__main__":
     s = Sear()
-    s.audio.select_output_device_by_name("bluealsa")
     s.wait_for_buttons()
-    
-    #s.audio.select_output_device_by_id(5)
-    
