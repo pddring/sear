@@ -1,9 +1,8 @@
 from threading import Thread
 import os
 class Bluetooth:
-    def __init__(self, device_id):
-        self.device_id = device_id
-
+    def __init__(self):
+        pass
     def connect(self):
         print(f"Connecting to bluetooth device {self.device_id} (NOT IMPLEMENTED YET)")
 
@@ -13,7 +12,7 @@ class Bluetooth:
             os.system("killall aplay")
 
             print(f"Playing audio {filename}")
-            os.system(f"aplay -D bluealsa:DEV={self.device_id},PROFILE=a2dp {filename} -q")
+            os.system(f"aplay -D bluealsa {filename} -q")
             print("Done")
         
         else:
@@ -23,7 +22,8 @@ class Bluetooth:
 
 if __name__ == "__main__":
     print("Testing bluetooth")
-    b = Bluetooth("24:29:34:A2:22:ED")
-    b.play_audio("last_speech.wav", False)
-    input("Wait...")
-    b.play_audio("last_speech.wav", False)
+    b = Bluetooth()
+    while True:
+        filename = input("wav file:")
+        b.play_audio(filename, False)
+    #

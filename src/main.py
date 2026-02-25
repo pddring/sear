@@ -20,8 +20,9 @@ class Sear(settings.Settings):
         self.ai = ai.GoogleAI(self.settings["API_KEY"])
 
         print("Initialising Bluetooth audio")
-        self.audio = bluetooth.Bluetooth(self.settings["bluetooth_device"])
-    
+        self.audio = bluetooth.Bluetooth()
+        #self.audio.select_output_device_by_name("bluealsa")
+
     def go_button(self, name):
         print("Taking picture")
         s.cam.take_picture()

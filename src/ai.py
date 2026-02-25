@@ -26,25 +26,29 @@ class GoogleAI(AI):
         self.ai = genai.Client(api_key=api_key)
         print("Setting up Google AI provider")
 
-    def get_speech(self, speech, filename="last_speech.wav"):
+    def get_speech(self, speech, filename="last_speech.wav", offline=False):
         print("Saying: " + speech)
 
-        response = self.ai.models.generate_content(
-            model="gemini-2.5-flash-preview-tts",
-            contents=speech,
-            config=types.GenerateContentConfig(
-                response_modalities=["AUDIO"],
-                speech_config=types.SpeechConfig(
-                    voice_config=types.VoiceConfig(
-                        prebuilt_voice_config=types.PrebuiltVoiceConfig(
-                        voice_name='Leda',
+        if offline:
+            os.system(f'espeak "{speech}" -w {filename}')
+        else:
+
+            response = self.ai.models.generate_content(
+                model="gemini-2.5-flash-preview-tts",
+                contents=speech,
+                config=types.GenerateContentConfig(
+                    response_modalities=["AUDIO"],
+                    speech_config=types.SpeechConfig(
+                        voice_config=types.VoiceConfig(
+                            prebuilt_voice_config=types.PrebuiltVoiceConfig(
+                            voice_name='Leda',
+                            )
                         )
-                    )
-                ),
+                    ),
+                )
             )
-        )
-        data = response.candidates[0].content.parts[0].inline_data.data
-        self.wave_file(filename, data)
+            data = response.candidates[0].content.parts[0].inline_data.data
+            self.wave_file(filename, data)
 
 
     def describe(self, prompt=""):
