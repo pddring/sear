@@ -17,6 +17,7 @@ class Sear(settings.Settings):
         self.buttons.add_listener('MIDDLE', 'SHORT_PRESS', self.go_button)
 
         self.buttons.add_listener('TOP', 'SHORT_PRESS', self.status_button)
+        self.buttons.add_listener('TOP', 'LONG_PRESS', self.connect_button)
 
         print(f"Creating AI client with API KEY: {self.settings['API_KEY']}")
         #self.ai = ai.AzureAI(self.settings["AZURE_KEY"], self.settings["AZURE_ENDPOINT"])
@@ -65,6 +66,16 @@ class Sear(settings.Settings):
             status += f"Not connected to bluetooth speakers or headphones"
         s.ai.get_speech(self.settings["voice_prompt"] + "\n" + status, "last_status.wav")
         s.audio.play_audio("last_status.wav")
+
+    def connect_button(self, name):
+        print("Trying to reconnect to bluetooth")
+        self.audio.set_power(False)
+        self.audio.set_power(True)
+        devices = self.audio.get_devices()
+        for id in devices:
+            self.audio.connect(id)
+            break
+        
         
     
     def wait_for_buttons(self):
