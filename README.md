@@ -102,3 +102,10 @@ We haven't yet made it so that the sear device can measure how much battery char
 We haven't yet coded it to fast forward / repeat the last speech using the left and right button. We hope to get that working soon
 
 Attempting to connect to the closest bluetooth headset or speaker doesn't always work reliably and sometimes you need to do this in the terminal using `bluetoothctl` then `scan on` to show all devices. This should show the MAC addresses of all detected devices, then you can do `connect 00:00:00:00:00` (replacing the MAC address with the one for the device you want to connect to.
+
+# List of parts
+|Raspberry Pi Zero 2 W|https://shop.pimoroni.com/products/raspberry-pi-zero-2-w?variant=42101934587987| £14.40|
+|Raspberry Pi Camera|https://shop.pimoroni.com/products/raspberry-pi-camera-module-v2?variant=19833929735|£14.40|
+|Battery pack|We used a free promotional one a bit like this: https://www.highflyers.de/p/span-1200-mah-powerbank-2513427700-p.html|£3.00|
+|Bluetooth speaker|Any bluetooth headset would work|Not included in price|
+|--|Totals:|£31.80|
